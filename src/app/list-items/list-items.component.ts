@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { features } from 'process';
 import { Item } from './item.model';
 import { Title } from './title.model';
 
@@ -11,6 +12,8 @@ export class ListItemsComponent implements OnInit {
   items: Item[] = [];
   titles: Title[] = [];
   titleAdded: boolean = false;
+  subsequentItem: boolean = true;
+  hide: boolean = false;
 
   addItem(newItem: string) {
     if (newItem !== '') {
@@ -29,10 +32,15 @@ export class ListItemsComponent implements OnInit {
     }
   }
 
-  newList() {
-    this.items = [];
-    this.titles = [];
-    this.titleAdded = false;
+  newItem() {
+    this.subsequentItem = false;
+    this.hide = true;
+  }
+
+  newItemAdded(newItem: string) {
+    this.items.push(new Item(newItem));
+    this.subsequentItem = true;
+    this.hide = false;
   }
 
   constructor() { }

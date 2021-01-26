@@ -20,7 +20,7 @@
     <form>
         <div class="mb-3">
             <label for="listTitle" class="form-label">Title of List</label>
-            <input id="listTitle" name="listTitle" type="text" class="form-control" #listTitle>
+            <input id="listTitle" autofocus name="listTitle" type="text" class="form-control" #listTitle>
             <!-- <div class="alert alert-danger" style="color: red;">* You must enter a valid list title</div> -->
         </div>
         <div class="mb-3">
@@ -33,16 +33,21 @@
 <hr>
 
 <!-- List Group Code -->
-    <div class="list-container">   
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-info listItem" *ngFor="let new of titles">
-                <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
-                <div *ngFor="let new of items">
-                <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." style="margin-left: 8px;">
-                <label class="strikethrough" style="margin-left: 28px;" class="strikethrough">{{new.item}}</label>
-                </div>
-                <button class="btn btn-success">Add Item</button>
-            </li>
-        </ul>
-    </div>
+      
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-info listItem" *ngFor="let new of titles">
+            <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
+            <div *ngFor="let new of items">
+            <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
+            <label class="strikethrough" style="margin-left: 28px;" class="strikethrough">{{new.item}}</label>
+            </div>
+            <div *ngIf="!hide">
+                <button class="btn btn-success" (click)="newItem()">Add Item</button> 
+            </div>
+            <div *ngIf="!subsequentItem">
+                <input autofocus type="text" class="form-control" #newItem style="margin-bottom: 10px;">
+                <button class="btn btn-success" (click)="newItemAdded(newItem.value); newItem.value = ''" >Add New Item</button>    
+            </div>
+        </li>
+    </ul>
 </div> 
