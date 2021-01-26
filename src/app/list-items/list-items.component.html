@@ -1,6 +1,6 @@
 <!-- Title and Item input fields -->
 <div class="container">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col align-self-center">
             <div class="input-group mb-3">
                 <input class="form-control" autofocus placeholder="Add a new Title to your list..." [disabled]="titleAdded" #itemTitle (keyup.enter)="addTitle(itemTitle.value); itemTitle.value=''">&nbsp; &nbsp;
@@ -16,13 +16,23 @@
             </div>    
         </div>
     </div>
-    <button class="btn center" (click)="newList()">New List</button>
-</div> 
-
+    <button class="btn center" (click)="newList()">New List</button> -->
+    <form>
+        <div class="mb-3">
+            <label for="listTitle" class="form-label">Title of List</label>
+            <input id="listTitle" name="listTitle" type="text" class="form-control" #listTitle>
+            <!-- <div class="alert alert-danger" style="color: red;">* You must enter a valid list title</div> -->
+        </div>
+        <div class="mb-3">
+            <label for="listItem" class="form-label">List Item</label>
+            <input id="listItem" name="listItem" type="text" class="form-control" #listItem>
+            <!-- <div class="alert alert-danger" style="color: red;">* You must enter a valid list Item</div> -->
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addTitle(listTitle.value); addItem(listItem.value); listTitle.value = ''; listItem.value = ''" >Create</button>
+    </form>    
 <hr>
 
 <!-- List Group Code -->
-<div class="container"> 
     <div class="list-container">   
         <ul class="list-group">
             <li class="list-group-item list-group-item-info listItem" *ngFor="let new of titles">
@@ -31,7 +41,8 @@
                 <input class="form-check-input me-1" type="checkbox" value="" aria-label="..." style="margin-left: 8px;">
                 <label class="strikethrough" style="margin-left: 28px;" class="strikethrough">{{new.item}}</label>
                 </div>
+                <button class="btn btn-success">Add Item</button>
             </li>
         </ul>
     </div>
-</div>
+</div> 
