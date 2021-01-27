@@ -38,9 +38,18 @@ export class ListItemsComponent implements OnInit {
   }
 
   newItemAdded(newItem: string) {
-    this.items.push(new Item(newItem));
-    this.subsequentItem = true;
-    this.hide = false;
+    if (newItem !== '') {
+      this.items.push(new Item(newItem));
+      this.subsequentItem = true;
+      this.hide = false;  
+    } else {
+      console.log('We simply cannot have an empty item here bud.');
+    }
+  }
+
+  newList() {
+    this.items = [];
+    this.titles = [];
   }
 
   constructor() { }

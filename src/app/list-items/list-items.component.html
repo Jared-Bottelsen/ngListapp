@@ -33,20 +33,20 @@
 <hr>
 
 <!-- List Group Code -->
-      
     <ul class="list-group">
         <li class="list-group-item list-group-item-info listItem" *ngFor="let new of titles">
             <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
             <div *ngFor="let new of items">
             <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
-            <label class="strikethrough" style="margin-left: 28px;" class="strikethrough">{{new.item}}</label>
+            <label class="strikethrough" style="margin-left: 28px;">{{new.item}}</label>
             </div>
-            <div *ngIf="!hide">
-                <button class="btn btn-success" (click)="newItem()">Add Item</button> 
+            <div *ngIf="!hide" class="top-margin">
+                <button class="btn" (click)="newItem()">Add Item</button> 
+                <button class="btn" (click)="newList()" style="float: right;">New List</button>
             </div>
-            <div *ngIf="!subsequentItem">
-                <input autofocus type="text" class="form-control" #newItem style="margin-bottom: 10px;">
-                <button class="btn btn-success" (click)="newItemAdded(newItem.value); newItem.value = ''" >Add New Item</button>    
+            <div *ngIf="!subsequentItem" class="top-margin">
+                <input autofocus type="text" class="form-control" #newItem style="margin-bottom: 10px;" (keyup.enter)="newItemAdded(newItem.value); newItem.value=''">
+                <button class="btn btn-success" (click)="newItemAdded(newItem.value); newItem.value = ''">Add New Item</button>    
             </div>
         </li>
     </ul>
