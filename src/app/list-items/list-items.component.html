@@ -28,11 +28,14 @@
             <input id="listItem" name="listItem" type="text" class="form-control" #listItem>
             <!-- <div class="alert alert-danger" style="color: red;">* You must enter a valid list Item</div> -->
         </div>
-        <button type="button" class="btn btn-primary" (click)="addTitle(listTitle.value); addItem(listItem.value); listTitle.value = ''; listItem.value = ''" >Create</button>
-    </form>    
+        <button type="button" class="btn btn-primary" (click)="addTitle(listTitle.value); addItem(listItem.value); listTitle.value = ''; listItem.value = ''">Create</button>
+    </form>   
+</div> 
+
 <hr>
 
 <!-- List Group Code -->
+<div class="container">
     <ul class="list-group">
         <li class="list-group-item list-group-item-info listItem" *ngFor="let new of titles">
             <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
@@ -50,4 +53,4 @@
             </div>
         </li>
     </ul>
-</div> 
+</div>
