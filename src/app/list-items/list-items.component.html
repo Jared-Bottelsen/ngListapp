@@ -1,56 +1,32 @@
 <!-- Title and Item input fields -->
 <div class="container">
-    <!-- <div class="row">
-        <div class="col align-self-center">
-            <div class="input-group mb-3">
-                <input class="form-control" autofocus placeholder="Add a new Title to your list..." [disabled]="titleAdded" #itemTitle (keyup.enter)="addTitle(itemTitle.value); itemTitle.value=''">&nbsp; &nbsp;
-                <button class="btn" [disabled]="titleAdded" (click)="addTitle(itemTitle.value); itemTitle.value=''">Add List Title</button>
-            </div>    
-        </div>
+    <div class="mb-3">
+        <label for="listTitle" class="form-label" style="font-size: 1.8rem;">List Title</label>
+        <input id="listTitle" autofocus name="listTitle" type="text" class="form-control" #listTitle (keyup.enter)="addList(listTitle.value); listTitle.value = ''">
+        <div class="alert alert-danger" style="color: red;" *ngIf="titleNotAdded">You must enter a valid List Title</div>
     </div>
-    <div class="row">
-        <div class="col align-self-center">
-            <div class="input-group mb-3">
-                <input class="form-control" autofocus="titleAdded" placeholder="Add a new Item to your list..." #newItem (keyup.enter)="addItem(newItem.value); newItem.value=''">&nbsp; &nbsp;
-                <button class="btn" (click)="addItem(newItem.value); newItem.value=''">Add List Item</button>
-            </div>    
-        </div>
-    </div>
-    <button class="btn center" (click)="newList()">New List</button> -->
-    <form>
-        <div class="mb-3">
-            <label for="listTitle" class="form-label">Title of List</label>
-            <input id="listTitle" autofocus name="listTitle" type="text" class="form-control" #listTitle>
-            <!-- <div class="alert alert-danger" style="color: red;">* You must enter a valid list title</div> -->
-        </div>
-        <div class="mb-3">
-            <label for="listItem" class="form-label">List Item</label>
-            <input id="listItem" name="listItem" type="text" class="form-control" #listItem>
-            <!-- <div class="alert alert-danger" style="color: red;">* You must enter a valid list Item</div> -->
-        </div>
-        <button type="button" class="btn btn-primary" (click)="addTitle(listTitle.value); addItem(listItem.value); listTitle.value = ''; listItem.value = ''">Create</button>
-    </form>   
+    <button type="button" class="btn btn-primary" (click)="addList(listTitle.value); listTitle.value = ''">Create</button>
 </div> 
 
 <hr>
-
 <!-- List Group Code -->
 <div class="container">
-    <ul class="list-group">
-        <li class="list-group-item list-group-item-info listItem" *ngFor="let new of titles">
-            <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
-            <div *ngFor="let new of items">
-            <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
-            <label class="strikethrough" style="margin-left: 28px;">{{new.item}}</label>
-            </div>
-            <div *ngIf="!hide" class="top-margin">
-                <button class="btn" (click)="newItem()">Add Item</button> 
-                <button class="btn" (click)="newList()" style="float: right;">New List</button>
-            </div>
-            <div *ngIf="!subsequentItem" class="top-margin">
-                <input autofocus type="text" class="form-control" #newItem style="margin-bottom: 10px;" (keyup.enter)="newItemAdded(newItem.value); newItem.value=''">
-                <button class="btn btn-success" (click)="newItemAdded(newItem.value); newItem.value = ''">Add New Item</button>    
-            </div>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-xl-12">
+            <ul class="list-group" *ngFor="let new of lists; let i = index">
+                <li class="list-group-item list-group-item-info listItem">
+                    <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
+                    <div *ngFor="let items of lists[i].items">
+                    <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
+                    <label class="strikethrough" style="margin-left: 28px">{{items}}</label>
+                    </div>
+                    <div>
+                        <input type="text" class="form-control" #newItem style="margin-bottom: 10px;" (keyup.enter)="addItem(newItem.value, i); newItem.value=''">
+                        <button class="btn" (click)="addItem(newItem.value, i); newItem.value = ''">Add Item</button>    
+                        <button class="btn" (click)="deleteList(i)" style="float: right;">Delete List</button> 
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
