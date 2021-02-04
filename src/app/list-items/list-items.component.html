@@ -13,17 +13,22 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12">
-            <ul class="list-group" *ngFor="let new of lists; let i = index">
+            <ul class="list-group" *ngFor="let newList of lists; let i = index">
                 <li class="list-group-item list-group-item-info listItem">
-                    <h1 style="text-decoration: underline; color: rgb(16, 23, 121);">{{new.title}}</h1>
-                    <div *ngFor="let items of lists[i].items">
+                    <h1 style="text-decoration: underline; color: rgb(16, 23, 121); margin-bottom: 10px;">{{newList.title}}</h1>
+                <div *ngFor="let items of lists[i].items; let j = index">
                     <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
                     <label class="strikethrough" style="margin-left: 28px">{{items}}</label>
-                    </div>
+                <div style="float: right;">
+                    <button class="btn" (click)="deleteItem(i, j)">Delete</button>
+                    <!-- <button class="btn">Edit</button> -->
+                </div>
+                    <hr>
+                </div>
                     <div>
-                        <input type="text" class="form-control" #newItem style="margin-bottom: 10px;" (keyup.enter)="addItem(newItem.value, i); newItem.value=''">
-                        <button class="btn" (click)="addItem(newItem.value, i); newItem.value = ''">Add Item</button>    
-                        <button class="btn" (click)="deleteList(i)" style="float: right;">Delete List</button> 
+                    <input type="text" class="form-control" #newItem style="margin-bottom: 10px;" (keyup.enter)="addItem(newItem.value, i); newItem.value=''">
+                    <button class="btn" (click)="addItem(newItem.value, i); newItem.value = ''">Add Item</button>    
+                    <button class="btn" (click)="deleteList(i)" style="float: right;">Delete List</button> 
                     </div>
                 </li>
             </ul>

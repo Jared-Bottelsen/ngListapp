@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListItemsComponent implements OnInit {
   titleNotAdded: boolean = false;
   lists = [];
+  isDisplay: boolean = false;
 
   addList(title: string) {
     if (title !== '') {
@@ -35,6 +36,19 @@ export class ListItemsComponent implements OnInit {
     this.lists.splice(index, 1);
     console.log(this.lists);
   }
+
+  deleteItem(listIndex: number, itemIndex: number) {
+    this.lists[listIndex].items.splice(itemIndex, 1);
+  }
+
+  mouseEnter(){
+    this.isDisplay = true;
+ }
+
+ mouseLeave(){
+    this.isDisplay = false;
+ }
+
  
   constructor() { }
 
