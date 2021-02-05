@@ -13,23 +13,32 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-12">
-            <ul class="list-group" *ngFor="let newList of lists; let i = index">
+            <ul class="list-group" *ngFor="let newList of lists; let listIndex = index">
                 <li class="list-group-item list-group-item-info listItem">
-                    <h1 style="text-decoration: underline; color: rgb(16, 23, 121); margin-bottom: 10px;">{{newList.title}}</h1>
-                <div *ngFor="let items of lists[i].items; let j = index">
+                    <h1>{{newList.title}}</h1>
+                <div *ngFor="let items of lists[listIndex].items; let itemIndex = index" (mouseenter)="mouseEnterDiv(listIndex, itemIndex)" (mouseleave)="mouseLeaveDiv(listIndex, itemIndex)">
                     <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
-                    <label class="strikethrough" style="margin-left: 28px">{{items}}</label>
-                <div style="float: right;">
-                    <button class="btn" (click)="deleteItem(i, j)">Delete</button>
-                    <!-- <button class="btn">Edit</button> -->
+                    <label class="strikethrough" style="margin-left: 28px">{{items.item}}</label>
+                <div style="float: right;" *ngIf="items.showButtons">
+                    <button class="btn" (click)="deleteItem(listIndex, itemIndex)" style="margin-right: 5px;">Delete</button>
+                    <button class="btn" (click)="showEdit(listIndex, itemIndex)">Edit</button>
+                </div>
+                <div *ngIf="items.editEnable">
+                    <input type="text" placeholder="Update Item here..." class="form-control" #changeItem (keyup.enter)="editItem(listIndex, itemIndex, changeItem.value)" style="margin-top: 10px;"> 
+                    <div class="alert alert-danger" style="color: red;" *ngIf="itemEditNotEntered">You must make a valid edit</div>
+                    <button class="btn" (click)="editItem(listIndex, itemIndex, changeItem.value)" style="margin-top: 10px;">Update</button>
+                    <button class="btn" (click)="cancelEdit(listIndex, itemIndex)" style="float: right; margin-top: 10px;">Cancel</button>
                 </div>
                     <hr>
                 </div>
-                    <div>
-                    <input type="text" class="form-control" #newItem style="margin-bottom: 10px;" (keyup.enter)="addItem(newItem.value, i); newItem.value=''">
-                    <button class="btn" (click)="addItem(newItem.value, i); newItem.value = ''">Add Item</button>    
-                    <button class="btn" (click)="deleteList(i)" style="float: right;">Delete List</button> 
-                    </div>
+                <div *ngIf="newList.itemInputVisible">  
+                    <input type="text" class="form-control" #newItem (keyup.enter)="addItem(newItem.value, listIndex); newItem.value=''">
+                    <div class="alert alert-danger" style="color: red;" *ngIf="listItemNotAdded">You must enter a valid List Item</div>
+                    <div style="margin-top: 10px;">
+                    <button class="btn" (click)="addItem(newItem.value, listIndex); newItem.value = ''">Add Item</button>    
+                    <button class="btn" (click)="deleteList(listIndex)" style="float: right;">Delete List</button> 
+                    </div>  
+                </div>      
                 </li>
             </ul>
         </div>
