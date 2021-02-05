@@ -16,6 +16,7 @@
             <ul class="list-group" *ngFor="let newList of lists; let listIndex = index">
                 <li class="list-group-item list-group-item-info listItem">
                     <h1>{{newList.title}}</h1>
+                    <hr>
                 <div *ngFor="let items of lists[listIndex].items; let itemIndex = index" (mouseenter)="mouseEnterDiv(listIndex, itemIndex)" (mouseleave)="mouseLeaveDiv(listIndex, itemIndex)">
                     <input class="form-check-input me-1" type="checkbox" style="margin-left: 8px;">
                     <label class="strikethrough" style="margin-left: 28px">{{items.item}}</label>
