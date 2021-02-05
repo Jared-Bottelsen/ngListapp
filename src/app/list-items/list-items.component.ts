@@ -69,6 +69,7 @@ export class ListItemsComponent implements OnInit {
 
   deleteItem(listIndex: number, itemIndex: number) {
     this.lists[listIndex].items.splice(itemIndex, 1);
+    this.lists[listIndex].itemInputVisible = true;
   }
 
   mouseEnterDiv(listIndex: number, itemIndex: number){
