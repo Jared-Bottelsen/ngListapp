@@ -2,7 +2,7 @@
 <div class="container">
     <div class="mb-3">
         <label for="listTitle" class="form-label" style="font-size: 1.8rem;">List Title</label>
-        <input id="listTitle" autofocus name="listTitle" type="text" class="form-control" #listTitle (keyup.enter)="addList(listTitle.value); listTitle.value = ''">
+        <input id="listTitle" placeholder="Add a title for your list..."  autofocus name="listTitle" type="text" class="form-control" #listTitle (keyup.enter)="addList(listTitle.value); listTitle.value = ''">
         <div class="alert alert-danger" style="color: red;" *ngIf="titleNotAdded">You must enter a valid List Title</div>
     </div>
     <button type="button" class="btn btn-primary" (click)="addList(listTitle.value); listTitle.value = ''">Create</button>
@@ -33,7 +33,7 @@
                     <hr>
                 </div>
                 <div *ngIf="newList.itemInputVisible">  
-                    <input type="text" class="form-control" #newItem (keyup.enter)="addItem(newItem.value, listIndex); newItem.value=''">
+                    <input type="text" placeholder="Add a new item to your list..." class="form-control" #newItem (keyup.enter)="addItem(newItem.value, listIndex); newItem.value=''">
                     <div class="alert alert-danger" style="color: red;" *ngIf="listItemNotAdded">You must enter a valid List Item</div>
                     <div style="margin-top: 10px;">
                     <button class="btn" (click)="addItem(newItem.value, listIndex); newItem.value = ''">Add Item</button>    
