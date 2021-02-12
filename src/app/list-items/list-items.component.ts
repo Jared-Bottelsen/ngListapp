@@ -29,13 +29,23 @@ export class ListItemsComponent implements OnInit {
 
   addItem(item: string, listIndex: number) {
     if (item !== '') {
-      this.lists[listIndex].items.push({item: item, editEnable: false, showButtons: false});
+      this.lists[listIndex].items.push({item: item, quantity: 0, editEnable: false, showButtons: false});
       console.log(this.lists);
       this.listItemNotAdded = false;
     } else {
       console.log('Add an item to the list thats not blank!');
       this.listItemNotAdded = true;
     }
+  }
+
+  increaseQuantity(listIndex: number, itemIndex: number) {
+    this.lists[listIndex].items[itemIndex].quantity += 1;
+  }
+
+  decreaseQuantity(listIndex: number, itemIndex: number) {
+    if (this.lists[listIndex].items[itemIndex].quantity > 0) {
+      this.lists[listIndex].items[itemIndex].quantity -= 1;
+    } 
   }
 
   showEdit(listIndex: number, itemIndex: number) {
