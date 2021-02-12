@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-list-items',
@@ -90,10 +90,12 @@ export class ListItemsComponent implements OnInit {
     this.lists[listIndex].items[itemIndex].showButtons = false;
  }
 
- 
-  constructor() { }
+ constructor() {
 
-  ngOnInit(): void {
-  }
+ }
+
+ ngOnInit() {
+
+ }
 
 }
